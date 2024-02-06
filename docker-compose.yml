@@ -9,9 +9,10 @@ services:
       - db
   db:
     container_name: db_container
-    image: arm64v8/postgres:16.1-alpine
+    build: ./db
     volumes:
       - template-vol:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
     ports:
       - 5432:5432
     environment:
