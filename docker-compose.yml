@@ -9,14 +9,19 @@ services:
       - db
   db:
     container_name: db_container
-    build: ./db
+    build:
+      context: ./db
+      args:
+        - SAMPLE_DATA=${SAMPLE_DATA}
+    tty: true
     volumes:
       - template-vol:/var/lib/postgresql/data
       - ./db/init:/docker-entrypoint-initdb.d
     ports:
-      - 5432:5432
+      - ${POSTGRES_PORT}:5432
     environment:
-      POSTGRES_PASSWORD: secret
-      POSTGRES_DB: template
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      SAMPLE_DATA: ${SAMPLE_DATA}
 volumes:
   template-vol:
