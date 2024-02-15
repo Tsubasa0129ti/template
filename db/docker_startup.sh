@@ -7,10 +7,10 @@ cd $script_directory/../
 # 引数を受け取る。
 if [ "$1" = "production" ] ; then
   # DBの初期値を本番用のものに設定する。
-  SAMPLE_DATA=sample_production
+  sample_data=sample_production
 else
   # DBの初期値を開発用のものに設定する。
-  SAMPLE_DATA=sample_dev
+  sample_data=sample_dev
 fi
 
 # .envが存在する場合には削除し、作り直す。
@@ -22,10 +22,23 @@ cat << EOF > .env
 POSTGRES_PORT=5432
 POSTGRES_PASSWORD=secret
 POSTGRES_DB=template
-SAMPLE_DATA=$SAMPLE_DATA
+SAMPLE_DATA=$sample_data
 EOF
 
-echo "Starting Container for $SAMPLE_DATA"
+# sample_dataのディレクトリを作成する。
+sql_directory=./db/sql
+
+if [ -d ${sql_directory}/sample_data ]; then
+  rm -rf "${sql_directory}/sample_data"
+fi
+
+mkdir db/sql/sample_data
+
+# 必要なファイルを追加する。
+cp -r ${sql_directory}/sample_common/* ${sql_directory}/sample_data/
+cp -r ${sql_directory}/${sample_data}/* ${sql_directory}/sample_data/
+
+echo "Starting Container for $sample_data"
 
 # docker composeからコンテナを起動する。
 docker compose up -d
