@@ -9,12 +9,14 @@ services:
       - db
   db:
     image: arm64v8/postgres:16.1-alpine
+    command: postgres -c 'config_file=/etc/postgresql/postgresql.conf'
     container_name: db_container
     tty: true
     volumes:
       - template-vol:/var/lib/postgresql/data
       - ./db/init:/docker-entrypoint-initdb.d
       - ./db/sql/sample_data:/initdb
+      - ./db/config/postgresql.conf:/etc/postgresql/postgresql.conf
     ports:
       - ${POSTGRES_PORT}:5432
     environment:
