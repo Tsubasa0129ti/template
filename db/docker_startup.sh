@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# コンテナが起動している場合には、停止する。
+if [ "$(docker ps -aq -f name=app_container)" ] ; then
+  if [ "$2" = "clean" ] ; then
+    docker compose down -v
+  else
+    docker compose down
+  fi
+fi
+
 # カレントディレクトリをプロジェクトルートに変更する。
 script_directory="$(dirname "$(readlink -f "$0")")"
 cd $script_directory/../
