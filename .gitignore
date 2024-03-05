@@ -42,3 +42,4 @@ db/sql/sample_data
 
 ### Node.js ###
 node_modules/
+src/main/resources/static/
