@@ -2,6 +2,11 @@
   "name": "template",
   "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
   "main": "index.ts",
   "repository": "https://github.com/Tsubasa0129ti/template.git",
   "license": "MIT",
