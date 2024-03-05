@@ -39,3 +39,6 @@ out/
 ### Docker ###
 .env
 db/sql/sample_data
+
+### Node.js ###
+node_modules/
