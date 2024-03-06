@@ -14,7 +14,8 @@ export default defineConfig({
     assetsDir: 'static',
     rollupOptions: {
       input: {
-        'templates/index': path.resolve(__dirname, 'src/templates/index.html')
+        'templates/index': path.resolve(__dirname, 'src/templates/index.html'),
+        'templates/db_sample.html': path.resolve(__dirname, 'src/templates/db_sample.html')
       }
     }
   }
