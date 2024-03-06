@@ -2,10 +2,23 @@ import { splitVendorChunkPlugin, defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
 import path from 'path';
+import {glob} from 'glob';
 
 const root = path.resolve(__dirname, 'src');
 
-// https://vitejs.dev/config/
+/**
+ * NOTE: searchPathは、src/templatesにするべき。
+ * ディレクトリを含めないと、出力先をコントロールできないので、やむを得ず。。。
+ */
+const searchPath = "src";
+const entryFiles = glob.sync("**/*.html", {
+  cwd: searchPath
+}).map((key) => {
+  return [key, path.resolve(searchPath, key)];
+});
+
+const entryObject = Object.fromEntries(entryFiles);
+
 export default defineConfig({
   root: root,
   plugins: [vue(), splitVendorChunkPlugin()],
@@ -24,13 +37,13 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: '../../src/main/resources/',
+    outDir: '../../src/main/resources/', // 本当は、出力先をtemplatesまでをここで指定したい。
+    /**
+     * NOTE: 本来は設定するべきだが、application.propertiesまで削除されてしまうため、無効にしている。
+     */
     // emptyOutDir: true,
     rollupOptions: {
-      input: {
-        'templates/index': path.resolve(__dirname, 'src/templates/index.html'),
-        'templates/db_sample.html': path.resolve(__dirname, 'src/templates/db_sample.html')
-      },
+      input: entryObject,
       output: {
         entryFileNames: (entryFile) => {
           /**
