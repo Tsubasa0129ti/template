@@ -2,8 +2,18 @@ import { splitVendorChunkPlugin, defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
 import path from 'path';
+import fs from 'fs';
 import {glob} from 'glob';
 
+/**
+ * 前処理: ビルドの出力結果を削除する。
+ */
+const output = path.resolve(__dirname, '../src/main/resources');
+
+removeDir(path.resolve(output, 'templates'));
+removeDir(path.resolve(output, 'static'));
+
+/** プロジェクトルートを設定。 */
 const root = path.resolve(__dirname, 'src');
 
 /**
@@ -14,7 +24,7 @@ const searchPath = "src";
 const entryFiles = glob.sync("**/*.html", {
   cwd: searchPath
 }).map((key) => {
-  return [key, path.resolve(searchPath, key)];
+  return [removeExt(key), path.resolve(searchPath, key)];
 });
 
 const entryObject = Object.fromEntries(entryFiles);
@@ -37,19 +47,15 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: '../../src/main/resources/', // 本当は、出力先をtemplatesまでをここで指定したい。
-    /**
-     * NOTE: 本来は設定するべきだが、application.propertiesまで削除されてしまうため、無効にしている。
-     */
-    // emptyOutDir: true,
+    outDir: '../../src/main/resources/',
     rollupOptions: {
       input: entryObject,
       output: {
         entryFileNames: (entryFile) => {
           /**
-           * NOTE: templatesディレクトリから一段階外に出している。かなり無理やり実装しているので、今後修正する。
+           * NOTE: templatesディレクトリから一段階外に出している。
            */
-          let name = entryFile.name.replace('templates/', '');
+          const name = cutFromBeginning(entryFile.name, 'templates/');
           return `static/js/${name}.js`;
         },
         chunkFileNames: `static/vendor/[hash].js`,
@@ -65,4 +71,33 @@ export default defineConfig({
       },
     }
   }
-})
+});
+
+/**
+ * 指定したパスのディレクトリを再起的に削除する。
+ * 
+ * @param path 削除する対象のディレクトリ
+ */
+async function removeDir(path: string) {
+  if(fs.existsSync(path)) {
+    await fs.rm(path, {recursive: true}, () => {
+      console.log(`Removed the directory ${path} recursively.`);
+    });
+  }
+}
+
+/**
+ * 対象の文字列を切り取って返却する。
+ * 
+ * @param originalString 編集対象の文字列
+ * @param targetString 切り取り対象の文字列
+ * @returns 編集後の文字列
+ */
+function cutFromBeginning(originalString: string, targetString: string) {
+  return originalString.substring(targetString.length);
+}
+
+/** 拡張子を削除する。 */
+function removeExt(key: string): string {
+  return key.split(".")[0];
+}
