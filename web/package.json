@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "dev": "vite build --watch --mode dev",
+    "build": "vite build --mode dev",
+    "production": "vue-tsc --noEmit && vite build --mode production",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -19,6 +20,7 @@
     "sass": "^1.71.1",
     "typescript": "^5.2.2",
     "vite": "^5.1.4",
+    "vite-plugin-checker": "^0.6.4",
     "vue-tsc": "^1.8.27"
   }
 }
