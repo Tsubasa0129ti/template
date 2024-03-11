@@ -17,6 +17,7 @@
     "@vitejs/plugin-vue": "^5.0.4",
     "glob": "^10.3.10",
     "path": "^0.12.7",
+    "prettier": "^3.2.5",
     "sass": "^1.71.1",
     "typescript": "^5.2.2",
     "vite": "^5.1.4",
