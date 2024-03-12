@@ -46,6 +46,10 @@ db/sql/sample_data
 ### Node.js ###
 web/node_modules
 
+### Yarn ###
+web/.yarn/*
+!web/.yarn/releases/
+
 # Logs
 logs
 *.log
