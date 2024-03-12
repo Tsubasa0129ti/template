@@ -41,5 +41,5 @@
       }
     ]
   },
-  "ignorePatterns": ["web/node_modules"]
+  "ignorePatterns": ["node_modules"]
 }
