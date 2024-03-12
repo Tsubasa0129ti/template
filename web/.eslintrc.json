@@ -41,5 +41,5 @@
       }
     ]
   },
-  "ignorePatterns": ["src/main/resources/static", "web/node_modules"]
+  "ignorePatterns": ["web/node_modules"]
 }
