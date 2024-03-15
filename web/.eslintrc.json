@@ -7,7 +7,6 @@
     "prettier"
   ],
   "parser": "vue-eslint-parser",
-  "plugins": ["vue", "@typescript-eslint", "jsdoc"],
   "parserOptions": {
     "ecmaVersion": "latest",
     "parser": "@typescript-eslint/parser",
@@ -37,7 +36,9 @@
           "MethodDefinition": true
         }
       }
-    ]
+    ],
+    /** jsdocの説明の後に1行改行が必要。 */
+    "jsdoc/tag-lines": ["warn", "any", { "startLines": 1 }]
   },
   "ignorePatterns": ["node_modules"]
 }
