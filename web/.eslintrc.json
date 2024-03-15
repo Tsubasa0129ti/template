@@ -22,12 +22,10 @@
   },
   "globals": {},
   "rules": {
-    "semi": ["error", "always"],
     "no-console": "warn",
     "camelcase": "warn",
     "eqeqeq": ["error", "always"],
     "import/prefer-default-export": "off",
-    "@typescript-eslint/quotes": ["error", "single"],
     "jsdoc/require-jsdoc": [
       "warn",
       {
