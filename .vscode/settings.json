@@ -1,23 +1,28 @@
 {
   "java.configuration.updateBuildConfiguration": "automatic", // Default settings, consider changing if necessary
 
+  /** デバッグに関わる設定 */
   "debug.inlineValues": "auto",
   "debug.internalConsoleOptions": "openOnSessionStart",
   "debug.openDebug": "openOnSessionStart",
   "debug.toolBarLocation": "docked",
+
+  /** エディターに関わる設定 */
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "editor.fontLigatures": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
+  "eslint.validate": ["javascript", "typescript", "vue"],
+  "prettier.bracketSpacing": true,
+  "prettier.embeddedLanguageFormatting": "off",
+
+  /** ファイル内の設定 */
   "files.insertFinalNewline": true, // ファイルの最終行に改行を挿入
   "files.trimFinalNewlines": true, // ファイルの最終行以降の空行を削除する
   "files.trimTrailingWhitespace": true, // ファイル保存時に末尾の空白を削除する。
-  "eslint.validate": ["javascript", "typescript", "vue"],
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "prettier.bracketSpacing": false,
-  "prettier.embeddedLanguageFormatting": "off",
 
+  /** Language Support for Java(TM) by Red Hat */
   "java.format.settings.profile": "GoogleStyle",
   "java.format.settings.url": "eclipse-java-google-style.xml",
   "[java]": {
@@ -25,6 +30,8 @@
   },
   "java.debug.settings.console": "internalConsole",
   "java.compile.nullAnalysis.mode": "automatic",
+
+  /** Checkstyle for Java */
   "java.checkstyle.version": "10.12.6",
   "java.checkstyle.configuration": "${workspaceFolder}/google_checks.xml"
 }
