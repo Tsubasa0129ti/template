@@ -23,4 +23,8 @@
   "[java]": {
     "editor.defaultFormatter": "redhat.java"
   },
+  "java.debug.settings.console": "internalConsole",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.checkstyle.version": "10.12.6",
+  "java.checkstyle.configuration": "${workspaceFolder}/google_checks.xml"
 }
