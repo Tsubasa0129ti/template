@@ -17,4 +17,10 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.bracketSpacing": false,
   "prettier.embeddedLanguageFormatting": "off",
+
+  "java.format.settings.profile": "GoogleStyle",
+  "java.format.settings.url": "eclipse-java-google-style.xml",
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
+  },
 }
