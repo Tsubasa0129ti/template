@@ -1,0 +1,20 @@
+{
+  "java.configuration.updateBuildConfiguration": "automatic", // Default settings, consider changing if necessary
+
+  "debug.inlineValues": "auto",
+  "debug.internalConsoleOptions": "openOnSessionStart",
+  "debug.openDebug": "openOnSessionStart",
+  "debug.toolBarLocation": "docked",
+  "editor.formatOnSave": true,
+  "editor.fontLigatures": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "files.insertFinalNewline": true, // ファイルの最終行に改行を挿入
+  "files.trimFinalNewlines": true, // ファイルの最終行以降の空行を削除する
+  "files.trimTrailingWhitespace": true, // ファイル保存時に末尾の空白を削除する。
+  "eslint.validate": ["javascript", "typescript", "vue"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.bracketSpacing": false,
+  "prettier.embeddedLanguageFormatting": "off",
+}
