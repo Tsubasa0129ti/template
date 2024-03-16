@@ -20,8 +20,7 @@
     "vmware.vscode-boot-dev-pack",
     "vmware.vscode-spring-boot",
     "vscjava.vscode-java-test",
-    "vue.vscode-typescript-vue-plugin",
-    "vue.volar"
+    "vue.vscode-typescript-vue-plugin"
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
   "unwantedRecommendations": ["vscjava.vscode-gradle"]
