@@ -1,0 +1,44 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:vue/vue3-recommended",
+    "plugin:jsdoc/recommended-typescript",
+    "prettier"
+  ],
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "parser": "@typescript-eslint/parser",
+    "sourceType": "module",
+    "project": "./tsconfig.eslint.json",
+    "extraFileExtensions": [".vue"]
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2022": true
+  },
+  "globals": {},
+  "rules": {
+    "no-console": "warn",
+    "camelcase": "warn",
+    "eqeqeq": ["error", "always"],
+    "import/prefer-default-export": "off",
+    "jsdoc/require-jsdoc": [
+      "warn",
+      {
+        "enableFixer": false,
+        "publicOnly": true,
+        "require": {
+          "ArrowFunctionExpression": true,
+          "ClassDeclaration": true,
+          "MethodDefinition": true
+        }
+      }
+    ],
+    /** jsdocの説明の後に1行改行が必要。 */
+    "jsdoc/tag-lines": ["warn", "any", { "startLines": 1 }]
+  },
+  "ignorePatterns": ["node_modules"]
+}
