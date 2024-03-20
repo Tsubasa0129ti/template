@@ -69,3 +69,6 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# 一時的な対応（開発環境のコンテナ化ができるまで...）
+src/main/resources/application.properties
