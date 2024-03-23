@@ -17,9 +17,12 @@ cd $script_directory/../
 if [ "$1" = "production" ] ; then
   # DBの初期値を本番用のものに設定する。
   sample_data=sample_production
+elif [ "$1" = "dev" ] ; then
+  sample_data=sample_dev
 else
   # DBの初期値を開発用のものに設定する。
-  sample_data=sample_dev
+  echo "First argument must specify \"production\" or \"dev\". Input: $1"
+  exit 1
 fi
 
 # .envが存在する場合には削除し、作り直す。
@@ -32,6 +35,7 @@ POSTGRES_PORT=5432
 POSTGRES_PASSWORD=secret
 POSTGRES_DB=template
 SAMPLE_DATA=$sample_data
+ENVIRONMENT=$1
 EOF
 
 # sample_dataのディレクトリを作成する。
