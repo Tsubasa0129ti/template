@@ -32,6 +32,7 @@ POSTGRES_PORT=5432
 POSTGRES_PASSWORD=secret
 POSTGRES_DB=template
 SAMPLE_DATA=$sample_data
+ENVIRONMENT=$1
 EOF
 
 # sample_dataのディレクトリを作成する。
@@ -51,7 +52,7 @@ echo "Starting Container for $sample_data"
 
 # docker composeからコンテナを起動する。
 if [ "$3" = "rebuild" ] ; then
-  docker compose up --build -d
+  docker compose up --build
 else
-  docker compose up -d
+  docker compose up
 fi
