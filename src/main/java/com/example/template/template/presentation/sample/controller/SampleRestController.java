@@ -1,6 +1,7 @@
 package com.example.template.template.presentation.sample.controller;
 
 import com.example.template.template.application.sample.AddSampleUseCase;
+import com.example.template.template.application.sample.FilterSamplesUseCase;
 import com.example.template.template.application.sample.GetSampleUseCase;
 import com.example.template.template.application.sample.SampleCommand;
 import com.example.template.template.application.sample.SampleDto;
@@ -18,7 +19,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 
 /**
@@ -26,18 +30,21 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("sample")
 public class SampleRestController {
 
   private final GetSampleUseCase getSampleUseCase;
 
   private final AddSampleUseCase addSampleUseCase;
 
+  private final FilterSamplesUseCase filterSamplesUseCase;
+
   /**
    * DBのサンプル情報を返却する。
    *
    * @return DBから取得したJSON形式のサンプルデータ
    */
-  @GetMapping("sample")
+  @GetMapping
   public List<SampleDto> getSample() {
     return getSampleUseCase.execute();
   }
@@ -48,7 +55,7 @@ public class SampleRestController {
    * @param form 追加するサンプル情報をもつForm
    * @return ステータスコード
    */
-  @PostMapping("sample")
+  @PostMapping
   public ResponseEntity<?> addSample(@RequestBody @Validated SampleForm form, BindingResult result)
       throws IllegalArgumentException, Exception {
 
@@ -72,6 +79,18 @@ public class SampleRestController {
     }
 
     return ResponseEntity.status(HttpStatus.CREATED).build();
+  }
+
+  /**
+   * サンプル情報をコメントの記入者名で絞り込む。
+   *
+   * @param name コメントの記入者名
+   * @return コメントの記入者名で絞り込みをしたサンプル情報
+   */
+  @GetMapping("filter")
+  public List<SampleDto> getSampleByName(
+      @RequestParam(name = "name", required = false) String name) {
+    return filterSamplesUseCase.execute(name);
   }
 
   /**
