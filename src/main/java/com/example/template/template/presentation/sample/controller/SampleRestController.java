@@ -9,11 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.connector.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,25 +49,51 @@ public class SampleRestController {
    * @return ステータスコード
    */
   @PostMapping("sample")
-  public ResponseEntity<?> addSample(@RequestBody @Validated SampleForm form,
-      BindingResult result) {
+  public ResponseEntity<?> addSample(@RequestBody @Validated SampleForm form, BindingResult result)
+      throws IllegalArgumentException, Exception {
 
-    // バリデーションを実装する。
     Map<String, String> errors = new HashMap<>();
 
     if (result.hasErrors()) {
       for (FieldError error : result.getFieldErrors()) {
         errors.put(error.getField(), error.getDefaultMessage());
       }
-      return ResponseEntity.badRequest().body(errors);
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
 
     SampleCommand command = new SampleCommand(form);
-    addSampleUseCase.execute(command);
 
-    // ResponseEntityを返却する。
-    return ResponseEntity.ok().body(null);
+    try {
+      addSampleUseCase.execute(command);
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException(e);
+    } catch (Exception e) {
+      throw new Exception(e);
+    }
+
+    return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
+  /**
+   * 不正な引数を取得した際の例外ハンドリング。
+   *
+   * @param e IllegalArgumentException
+   * @return エラーメッセージとステータスコード
+   */
+  @ExceptionHandler({ IllegalArgumentException.class })
+  public ResponseEntity<?> illegalArgumentExceptionHandler(IllegalArgumentException e) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+  }
+
+  /**
+   * 不明な例外を補足した場合の例外ハンドリング。
+   *
+   * @param e Exception
+   * @return エラーメッセージとステータスコード
+   */
+  @ExceptionHandler({ Exception.class })
+  public ResponseEntity<?> exceptionHandler(Exception e) {
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+  }
 
 }
