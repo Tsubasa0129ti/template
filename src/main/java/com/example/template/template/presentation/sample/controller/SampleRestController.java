@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("sample")
+@RequestMapping("/api/sample")
 public class SampleRestController {
 
   private final GetSampleUseCase getSampleUseCase;
