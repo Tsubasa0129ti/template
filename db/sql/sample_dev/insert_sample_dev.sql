@@ -1,2 +1,2 @@
-insert into users (id, name) 
-values ('A10001', 'dev User01');
+INSERT INTO users (id, name)
+VALUES ('A10001', 'dev User01');
