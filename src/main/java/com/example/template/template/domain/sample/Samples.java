@@ -8,12 +8,14 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * サンプルの情報をもつドメインクラス。
  */
 @Entity
 @Table(name = "samples")
+@NoArgsConstructor
 @Getter
 public class Samples {
 
