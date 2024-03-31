@@ -1,6 +1,6 @@
 package com.example.template.template.application.sample;
 
-import com.example.template.template.domain.sample.Samples; // ドメインの規則に反していないかを確認。
+import com.example.template.template.domain.sample.Samples;
 import java.time.LocalDateTime;
 import lombok.Getter;
 
