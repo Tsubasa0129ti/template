@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 services:
   app:
     container_name: app_container
@@ -25,10 +25,27 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
       SAMPLE_DATA: ${SAMPLE_DATA}
-    healthcheck: 
-      test: ["CMD-SHELL", "pg_isready --username=postgres"]
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready --username=postgres']
       interval: 10s
       timeout: 5s
       retries: 5
+  web:
+    container_name: web_container
+    build: ./web
+    volumes:
+      - web-source:/app/dist
+    environment:
+      NODE_ENV: ${ENVIRONMENT}
+  nginx:
+    container_name: nginx_container
+    build: ./nginx
+    volumes:
+      - web-source:/app
+    ports:
+      - 3000:80
+    depends_on:
+      - web
 volumes:
   template-vol:
+  web-source:
