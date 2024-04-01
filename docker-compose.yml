@@ -2,12 +2,23 @@ version: '3.9'
 services:
   app:
     container_name: app_container
-    build: .
+    build:
+      context: .
+      target: ${ENVIRONMENT}
     ports:
       - 8080:8080
     depends_on:
       db:
         condition: service_healthy
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./src/main/java
+          target: /app/src/main/java
+        - action: rebuild
+          path: ./src/main/resources
+        - action: rebuild
+          path: ./build.gradle
   db:
     image: arm64v8/postgres:16.1-alpine
     command: -c 'config_file=/etc/postgresql/postgresql.conf'
