@@ -50,9 +50,14 @@ cp -r ${sql_directory}/${sample_data}/* ${sql_directory}/sample_data/
 
 echo "Starting Container for $sample_data"
 
-# docker composeからコンテナを起動する。
+# Dockerイメージをビルドする。
 if [ "$3" = "rebuild" ] ; then
-  docker compose up --build
+  docker compose build
+fi
+
+# Dockerコンテナを起動する。
+if [ "$1" = "dev" ] ; then
+  docker compose watch
 else
   docker compose up
 fi

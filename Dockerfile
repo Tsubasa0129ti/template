@@ -1,3 +1,4 @@
+# 本番環境用のビルドステージ
 FROM eclipse-temurin:17-jdk-jammy AS builder
 WORKDIR /app
 COPY . .
@@ -16,7 +17,8 @@ RUN jlink \
     --vm server \
     --output /opt/jre
 
-FROM ubuntu:22.04 AS runner
+# 本番環境用の実行ステージ
+FROM ubuntu:22.04 AS production
 WORKDIR /app
 
 ENV JAVA_HOME /opt/jre
@@ -25,5 +27,11 @@ ENV PATH "$PATH:$JAVA_HOME/bin"
 COPY --from=builder /opt/jre $JAVA_HOME
 COPY --from=builder /app/build/libs/template-0.0.1-SNAPSHOT.jar app.jar
 
-EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
+# 開発環境用のホットリロードステージ
+FROM eclipse-temurin:17-jdk-jammy AS dev
+WORKDIR /app
+COPY . .
+RUN ./gradlew clean build
+CMD ./gradlew bootRun
