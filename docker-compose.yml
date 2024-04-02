@@ -45,14 +45,25 @@ services:
     container_name: web_container
     build: ./web
     volumes:
-      - web-source:/app/dist
+      - type: bind
+        source: ./web/src
+        target: /app/src
+      - type: volume
+        source: web-source
+        target: /app/dist
     environment:
       NODE_ENV: ${ENVIRONMENT}
+    develop:
+      watch:
+        - action: rebuild
+          path: ./web/package.json
   nginx:
     container_name: nginx_container
     build: ./nginx
     volumes:
-      - web-source:/app
+      - type: volume
+        source: web-source
+        target: /app
     ports:
       - 3000:80
     depends_on:
