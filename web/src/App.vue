@@ -24,8 +24,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <router-link to="/">DashBoard</router-link>
-  <router-link to="/login">Login</router-link>
   <router-view></router-view>
 </template>
 
