@@ -6,7 +6,7 @@ import LoginView from '../pages/Login.vue';
 import AccountView from '../pages/Account.vue';
 import PasswordForgotView from '../pages/password/PasswordForgot.vue';
 import PasswordResetView from '../pages/password/PasswordReset.vue';
-import NotFound from '../pages/error/NotFound.vue';
+import NotFound from '../pages/errors/NotFound.vue';
 
 const routes = [
   { path: '/', component: DashBoardView },
