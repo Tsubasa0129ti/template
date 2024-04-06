@@ -38,7 +38,9 @@
       }
     ],
     /** jsdocの説明の後に1行改行が必要。 */
-    "jsdoc/tag-lines": ["warn", "any", { "startLines": 1 }]
+    "jsdoc/tag-lines": ["warn", "any", { "startLines": 1 }],
+    /** Vueのコンポーネント名は、単一のワードを許容する。 */
+    "vue/multi-word-component-names": "off"
   },
   "ignorePatterns": ["node_modules"]
 }
