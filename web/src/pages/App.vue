@@ -36,6 +36,9 @@ onMounted(() => {
       <img src="../assets/sample.png" class="logo vue" alt="Vue logo" />
     </a>
   </div>
+  <router-link to="/">DashBoard</router-link>
+  <router-link to="/foobar">FooBar</router-link>
+  <router-view></router-view>
   <HelloWorld msg="Vite + Vue" />
 </template>
 
