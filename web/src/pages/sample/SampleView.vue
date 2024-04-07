@@ -2,7 +2,7 @@
   <div>
     <div class="comment-view">
       <div class="filter-comment">
-        <input type="text" />
+        <input v-model="input" />
         <button type="submit" @click="filterComment">絞り込み</button>
       </div>
       <div v-for="sample in samples" :key="sample.id" class="comment">
@@ -21,6 +21,7 @@ import getRepository from '../../api/repositoryFactory';
 import { SampleDto } from '../../store/samples/SampleDto';
 
 const samples = ref<SampleDto[]>([]);
+const input = ref('');
 
 onMounted(() => {
   getRepository()
@@ -34,6 +35,13 @@ onMounted(() => {
 });
 
 function filterComment() {
-  console.log('OK');
+  getRepository()
+    .samples.filterByUserName(input.value)
+    .then((sampleDtos) => {
+      samples.value = sampleDtos.data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 </script>

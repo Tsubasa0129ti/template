@@ -33,7 +33,11 @@ export default class SampleRepository {
    * @param name コメントの記入者名
    * @returns コメントの記入者名が一致するサンプル情報
    */
-  // public filterByUserName(name: string): AxiosPromise<SampleDto[]> {
-  //   return repository.get(`${resources}/filter`, name);
-  // }
+  public filterByUserName(name: string): AxiosPromise<SampleDto[]> {
+    return repository.get(`${resources}/filter`, {
+      params: {
+        name: name
+      }
+    });
+  }
 }
