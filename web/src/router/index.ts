@@ -6,6 +6,7 @@ import LoginView from '../pages/Login.vue';
 import AccountView from '../pages/Account.vue';
 import PasswordForgotView from '../pages/password/PasswordForgot.vue';
 import PasswordResetView from '../pages/password/PasswordReset.vue';
+import SampleView from '../pages/sample/SampleView.vue';
 import NotFound from '../pages/errors/NotFound.vue';
 
 const routes = [
@@ -26,6 +27,7 @@ const routes = [
       }
     ]
   },
+  { path: '/sample', component: SampleView },
   { path: '/:pathMatch(.*)*', component: NotFound }
 ];
 
