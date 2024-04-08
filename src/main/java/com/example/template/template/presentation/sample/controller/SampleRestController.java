@@ -82,15 +82,15 @@ public class SampleRestController {
   }
 
   /**
-   * サンプル情報をコメントの記入者名で絞り込む。
+   * コメントの記入者名が検索文字列に部分一致するサンプル情報を取得する。
    *
-   * @param name コメントの記入者名
-   * @return コメントの記入者名で絞り込みをしたサンプル情報
+   * @param param 検索文字列
+   * @return 検索文字列に部分一致するサンプル情報
    */
   @GetMapping("filter")
   public List<SampleDto> getSampleByName(
-      @RequestParam(name = "name", required = false) String name) {
-    return filterSamplesUseCase.execute(name);
+      @RequestParam(name = "param", required = false) String param) {
+    return filterSamplesUseCase.execute(param);
   }
 
   /**

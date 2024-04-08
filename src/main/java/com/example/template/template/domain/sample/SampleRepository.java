@@ -12,10 +12,10 @@ import org.springframework.stereotype.Repository;
 public interface SampleRepository extends JpaRepository<Samples, String> {
 
   /**
-   * コメントの記入者名が一致するサンプル情報を取得する。
+   * コメントの記入者名が検索文字列に部分一致するサンプル情報を取得する。
    *
-   * @param name コメントの記入者名
-   * @return コメントの記入者名が一致するサンプル情報
+   * @param param 検索文字列
+   * @return 検索文字列に部分一致するサンプル情報
    */
-  List<Samples> findByName(String name);
+  List<Samples> findByNameContaining(String param);
 }

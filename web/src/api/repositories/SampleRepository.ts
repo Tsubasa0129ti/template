@@ -28,15 +28,15 @@ export default class SampleRepository {
   }
 
   /**
-   * コメントの記入者名が一致するサンプル情報を取得する。
+   * コメントの記入者名が検索文字列に部分一致するサンプル情報を取得する。
    *
-   * @param name コメントの記入者名
-   * @returns コメントの記入者名が一致するサンプル情報
+   * @param param 検索文字列
+   * @returns 検索文字列に部分一致するサンプル情報
    */
-  public filterByUserName(name: string): AxiosPromise<SampleDto[]> {
+  public filterByUserName(param: string): AxiosPromise<SampleDto[]> {
     return repository.get(`${resources}/filter`, {
       params: {
-        name: name
+        param: param
       }
     });
   }
