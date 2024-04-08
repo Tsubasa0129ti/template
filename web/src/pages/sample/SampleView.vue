@@ -17,15 +17,25 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import getRepository from '../../api/repositoryFactory';
 import { SampleDto } from '../../store/samples/SampleDto';
+import router from '../../router';
+
+const route = useRoute();
 
 const samples = ref<SampleDto[]>([]);
 const input = ref('');
 
 onMounted(() => {
+  const query = route.query.q;
+
+  if (typeof query === 'string') {
+    input.value = query;
+  }
+
   getRepository()
-    .samples.getAll()
+    .samples.filterByUserName(input.value)
     .then((sampleDtos) => {
       samples.value = sampleDtos.data;
     })
@@ -35,13 +45,6 @@ onMounted(() => {
 });
 
 function filterComment() {
-  getRepository()
-    .samples.filterByUserName(input.value)
-    .then((sampleDtos) => {
-      samples.value = sampleDtos.data;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  router.push({ path: 'sample', query: { q: input.value } });
 }
 </script>
