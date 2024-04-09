@@ -1,6 +1,7 @@
 import { AxiosPromise } from 'axios';
 import repository from '../repository';
 import { SampleDto } from '../../store/samples/SampleDto';
+import SampleForm from '../../models/samples/SampleForm';
 
 const resources = '/sample';
 
@@ -20,11 +21,11 @@ export default class SampleRepository {
   /**
    * サンプルテーブルへの追加処理を実施する。
    *
-   * @param samples 新規追加するサンプル情報
+   * @param sample 新規追加するサンプル情報
    * @returns 非同期のアクションの結果。
    */
-  public addSample(samples: SampleDto): AxiosPromise<void> {
-    return repository.post(`${resources}`, samples);
+  public addSample(sample: SampleForm): AxiosPromise<void> {
+    return repository.post(`${resources}`, sample);
   }
 
   /**
