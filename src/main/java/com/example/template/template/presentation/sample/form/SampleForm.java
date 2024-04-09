@@ -1,8 +1,8 @@
 package com.example.template.template.presentation.sample.form;
 
-import org.hibernate.validator.constraints.Length;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+import org.hibernate.validator.constraints.Length;
 
 /**
  * 追加するDBのサンプル情報をもつFormクラス。
@@ -11,11 +11,12 @@ import lombok.Getter;
 public class SampleForm {
 
   /** コメントの記入者名 */
-  @NotNull(message = "名前は必須です。")
+  @NotBlank(message = "名前は必須です。")
+  @Length(max = 10)
   private String name;
 
   /** コメントの内容 */
-  @NotNull(message = "コメントは必須です。")
+  @NotBlank(message = "コメントは必須です。")
   @Length(max = 100)
   private String comment;
 }
