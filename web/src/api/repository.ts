@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseDomain = 'http://localhost:8080';
+const baseDomain = import.meta.env.VITE_API_BASE_URL;
 const baseURL = `${baseDomain}/api`;
 
 // axios instanceの詳細については、以下を参照。
