@@ -1,11 +1,11 @@
 package com.example.template.template.domain.sample;
 
 import com.example.template.template.application.sample.SampleCommand;
+import com.example.template.template.domain.AbstractEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "samples")
 @NoArgsConstructor
 @Getter
-public class Samples {
+public class Samples extends AbstractEntity {
 
   /** コメントの一意のID */
   @Id
@@ -31,14 +31,6 @@ public class Samples {
   /** コメントの内容 */
   @Column(name = "comment")
   private String comment;
-
-  /** コメントの作成日時 */
-  @Column(name = "created_at")
-  private LocalDateTime createdAt;
-
-  /** コメントの更新日時 */
-  @Column(name = "updated_at")
-  private LocalDateTime updatedAt;
 
   /**
    * コマンドクラスからサンプルのドメインクラスを作成する。
