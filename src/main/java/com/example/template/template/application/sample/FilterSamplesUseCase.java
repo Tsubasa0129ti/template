@@ -17,13 +17,13 @@ public class FilterSamplesUseCase {
   private final SampleRepository sampleRepository;
 
   /**
-   * コメントの記入者名で絞り込みをしたサンプル情報を返却する。
+   * コメントの記入者名が検索文字列に部分一致するサンプル情報を取得する。
    *
-   * @param name コメントの記入者名
-   * @return コメントの記入者名で絞り込みをしたサンプル情報
+   * @param param 検索文字列
+   * @return 検索文字列に部分一致するサンプル情報
    */
-  public List<SampleDto> execute(String name) {
-    List<Samples> filteredSample = sampleRepository.findByName(name);
+  public List<SampleDto> execute(String param) {
+    List<Samples> filteredSample = sampleRepository.findByNameContaining(param);
 
     return filteredSample.stream().map(SampleDto::new).collect(Collectors.toList());
   }

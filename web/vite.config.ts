@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     root: root,
+    envDir: '../',
     plugins: [
       vue(),
       splitVendorChunkPlugin(),
@@ -37,10 +38,6 @@ export default defineConfig(({ mode }) => {
       outDir: '../dist',
       emptyOutDir: true,
       rollupOptions: {
-        input: {
-          index: path.join(__dirname, 'src/index.html'),
-          axiosConfig: path.join(__dirname, 'src/axios/axios-config.ts')
-        },
         output: {
           entryFileNames: `static/js/[name].js`,
           chunkFileNames: `static/vendor/[hash].js`,
