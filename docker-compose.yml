@@ -45,8 +45,6 @@ services:
     container_name: web_container
     build:
       context: ./web
-      args:
-        NODE_ENV: ${ENVIRONMENT}
     volumes:
       - type: bind
         source: ./web/src
@@ -56,6 +54,7 @@ services:
         target: /app/dist
     environment:
       VITE_API_BASE_URL: ${VITE_API_BASE_URL}
+      NODE_ENV: ${ENVIRONMENT}
     develop:
       watch:
         - action: rebuild
