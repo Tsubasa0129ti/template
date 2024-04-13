@@ -12,7 +12,6 @@ export default defineConfig(({ mode }) => {
 
   return {
     root: root,
-    envDir: '../',
     plugins: [
       vue(),
       splitVendorChunkPlugin(),

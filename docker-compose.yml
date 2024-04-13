@@ -52,6 +52,7 @@ services:
         source: web-source
         target: /app/dist
     environment:
+      VITE_API_BASE_URL: ${VITE_API_BASE_URL}
       NODE_ENV: ${ENVIRONMENT}
     develop:
       watch:
