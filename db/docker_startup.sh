@@ -13,28 +13,6 @@ fi
 script_directory="$(dirname "$(readlink -f "$0")")"
 cd $script_directory/../
 
-# 引数を受け取る。
-if [ "$1" = "production" ] ; then
-  # DBの初期値を本番用のものに設定する。
-  sample_data=sample_production
-else
-  # DBの初期値を開発用のものに設定する。
-  sample_data=sample_dev
-fi
-
-# .envが存在する場合には削除し、作り直す。
-if [ -f .env ] ; then
-  rm .env
-fi
-
-cat << EOF > .env
-POSTGRES_PORT=5432
-POSTGRES_PASSWORD=secret
-POSTGRES_DB=template
-SAMPLE_DATA=$sample_data
-ENVIRONMENT=$1
-EOF
-
 # sample_dataのディレクトリを作成する。
 sql_directory=./db/sql
 
@@ -46,9 +24,9 @@ mkdir db/sql/sample_data
 
 # 必要なファイルを追加する。
 cp -r ${sql_directory}/sample_common/* ${sql_directory}/sample_data/
-cp -r ${sql_directory}/${sample_data}/* ${sql_directory}/sample_data/
+cp -r ${sql_directory}/sample_$1/* ${sql_directory}/sample_data/
 
-echo "Starting Container for $sample_data"
+echo "Starting Container for sample_$1"
 
 # Dockerイメージをビルドする。
 if [ "$3" = "rebuild" ] ; then
@@ -57,7 +35,7 @@ fi
 
 # Dockerコンテナを起動する。
 if [ "$1" = "dev" ] ; then
-  docker compose watch
+  docker compose --env-file .env.dev watch
 else
   docker compose up
 fi
