@@ -83,9 +83,10 @@ function postComment() {
     .then(() => {
       resetMessage();
     })
-    .catch((err) => {
-      nameError.value = err.response.data.name;
-      commentError.value = err.response.data.comment;
+    .catch((error) => {
+      const messages = error.response?.data;
+      nameError.value = messages.name;
+      commentError.value = messages.comment;
     });
 }
 
