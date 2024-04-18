@@ -5,10 +5,12 @@ import { InternalServerError, NetWorkError } from '../utils/custom-error';
 const baseDomain = import.meta.env.VITE_API_BASE_URL;
 const baseURL = `${baseDomain}/api`;
 
-// axios instanceの詳細については、以下を参照。
-// https://axios-http.com/docs/instance
 const axiosInstance = axios.create({
-  baseURL
+  baseURL,
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  timeout: 1000
 });
 
 axiosInstance.interceptors.request.use(
