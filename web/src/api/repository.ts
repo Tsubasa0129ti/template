@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import router from '../router/index';
+import { InternalServerError, NetWorkError } from '../utils/custom-error';
 
 const baseDomain = import.meta.env.VITE_API_BASE_URL;
 const baseURL = `${baseDomain}/api`;
@@ -34,15 +35,19 @@ axiosInstance.interceptors.response.use(
           window.alert('セッションが期限切れです。再度ログインしてください。');
           router.push('/login');
           break;
-        // TODO: アクセス拒否についてのハンドリングを記載する。
+        // アクセス拒否
         case 403:
+          router.push({
+            path: '/error',
+            state: { message: error.response.data.message, statusCode: error.response.status }
+          });
           break;
-        // TODO: リソースが存在しない場合のハンドリングを記載する。
-        case 404:
-          break;
-        /** NOTE: ステータスコード422, 500を捕捉する。 */
-        default:
+        // バリデーションエラー
+        case 422:
           return Promise.reject(error);
+        /** NOTE: ステータスコード500, 503を捕捉する。 */
+        default:
+          throw new InternalServerError(error);
       }
     }
 
@@ -50,11 +55,7 @@ axiosInstance.interceptors.response.use(
      * NOTE: サーバーダウンなどの原因により、レスポンスがない場合のハンドリング。
      */
     if (error.request) {
-      const networkError: Error = new Error(
-        'ネットワークエラーが発生しました。しばらくしてから再度お試しください。'
-      );
-      // TODO: ユーザー側から自発的に解決ができる様な操作のボタンやリンクを提供する。
-      return Promise.reject(networkError);
+      throw new NetWorkError(error);
     }
 
     /**
