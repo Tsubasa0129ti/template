@@ -2,7 +2,7 @@
   <header>
     <div v-if="statusCode">{{ statusCode }} {{ responseStatus }}</div>
     <div v-else></div>
-    <div>{{ getTime }}</div>
+    <div>{{ getTime() }}</div>
   </header>
   <div class="detail">
     <p>{{ message }}</p>
