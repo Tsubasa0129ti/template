@@ -1,4 +1,5 @@
 const errorMessages = {
+  UNPROCESSABLE_ENTITY: '',
   INTERNAL_SERVER_ERROR: 'システム障害が発生しました。',
   NETWORK_ERROR: 'ネットワークエラーが発生しました。しばらくしてから再度お試しください。'
 };
@@ -19,6 +20,20 @@ abstract class CustomError extends Error implements CustomErrorInterface {
       writable: true
     });
     this.cause = cause;
+  }
+}
+
+/**
+ * Unprocessable Entityを補足するカスタムエラーハンドラ。
+ */
+class UnprocessableEntity extends CustomError {
+  /**
+   * カスタムエラーオブジェクトを生成する。
+   *
+   * @param error エラーオブジェクト
+   */
+  constructor(error: Error) {
+    super(errorMessages.UNPROCESSABLE_ENTITY, error);
   }
 }
 
@@ -50,4 +65,4 @@ class NetWorkError extends CustomError {
   }
 }
 
-export { InternalServerError, NetWorkError };
+export { UnprocessableEntity, InternalServerError, NetWorkError };

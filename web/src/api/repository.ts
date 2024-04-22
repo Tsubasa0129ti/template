@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import router from '../router/index';
-import { InternalServerError, NetWorkError } from '../utils/custom-error';
+import { InternalServerError, NetWorkError, UnprocessableEntity } from '../utils/custom-error';
 
 const baseDomain = import.meta.env.VITE_API_BASE_URL;
 const baseURL = `${baseDomain}/api`;
@@ -46,7 +46,7 @@ axiosInstance.interceptors.response.use(
           break;
         // バリデーションエラー
         case 422:
-          return Promise.reject(error);
+          return Promise.reject(new UnprocessableEntity(error));
         /** NOTE: ステータスコード500, 503を捕捉する。 */
         default:
           throw new InternalServerError(error);
