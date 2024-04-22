@@ -8,10 +8,13 @@ type errorMessages = (typeof errorMessages)[keyof typeof errorMessages];
 interface CustomErrorInterface {
   name: string;
   message: string;
+  originalError: Error;
 }
 
 abstract class CustomError extends Error implements CustomErrorInterface {
-  constructor(message: string, { cause }: Error) {
+  originalError: Error;
+
+  constructor(message: string, error: Error) {
     super(message);
     Object.defineProperty(this, 'name', {
       configurable: true,
@@ -19,7 +22,7 @@ abstract class CustomError extends Error implements CustomErrorInterface {
       value: this.constructor.name,
       writable: true
     });
-    this.cause = cause;
+    this.originalError = error;
   }
 }
 
