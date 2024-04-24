@@ -1,6 +1,10 @@
-import { App } from 'vue';
+import { App, ref } from 'vue';
 import { InternalServerError, NetWorkError } from '../utils/custom-error';
 import router from '../router/index';
+
+export const errorState = ref({
+  message: ''
+});
 
 const ErrorHandlerPlugin = {
   install(app: App<Element>) {
@@ -31,9 +35,10 @@ const ErrorHandlerPlugin = {
 
 const handler = (error: unknown) => {
   if (error instanceof InternalServerError) {
-    // 画面の遷移をせずに、画面上に共通エラーメッセージを表示する。
+    errorState.value.message = error.message;
   } else if (error instanceof NetWorkError) {
     // 画面上への描画とリトライボタンを表示する。
+    errorState.value.message = error.message;
   } else if (error instanceof Error) {
     router.push({ path: '/error', state: { message: error.message } });
   }
