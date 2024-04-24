@@ -1,5 +1,9 @@
 <template>
-  <ErrorMessage v-if="errorState.message" :error-message="errorState.message" />
+  <ErrorMessage
+    v-if="errorState.message"
+    :error-message="errorState.message"
+    :can-retry="errorState.canRetry"
+  />
   <router-view></router-view>
 </template>
 
