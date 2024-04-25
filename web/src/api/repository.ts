@@ -27,6 +27,7 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
+    console.log('interceptors');
     /**
      * NOTE: サーバーからのエラーのレスポンスがある場合のハンドリング。
      */
@@ -57,6 +58,10 @@ axiosInstance.interceptors.response.use(
      * NOTE: サーバーダウンなどの原因により、レスポンスがない場合のハンドリング。
      */
     if (error.request) {
+      if (window.confirm('ネットワークのエラーが発生しました。リトライしますか？')) {
+        return axiosInstance.request(error.config);
+      }
+
       throw new NetWorkError(error);
     }
 
