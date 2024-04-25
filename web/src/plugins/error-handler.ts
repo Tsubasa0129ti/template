@@ -3,8 +3,7 @@ import { InternalServerError, NetWorkError } from '../utils/custom-error';
 import router from '../router/index';
 
 export const errorState = ref({
-  message: '',
-  canRetry: false
+  message: ''
 });
 
 const ErrorHandlerPlugin = {
@@ -40,7 +39,6 @@ const handler = (error: unknown) => {
   } else if (error instanceof NetWorkError) {
     // 画面上への描画とリトライボタンを表示する。
     errorState.value.message = error.message;
-    errorState.value.canRetry = true;
   } else if (error instanceof Error) {
     router.push({ path: '/error', state: { message: error.message } });
   }
