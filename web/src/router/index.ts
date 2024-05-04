@@ -8,6 +8,7 @@ import PasswordForgotView from '../pages/password/PasswordForgot.vue';
 import PasswordResetView from '../pages/password/PasswordReset.vue';
 import SampleView from '../pages/sample/SampleView.vue';
 import NotFound from '../pages/errors/NotFound.vue';
+import Error from '../pages/errors/error.vue';
 
 const routes = [
   { path: '/', component: DashBoardView },
@@ -28,6 +29,7 @@ const routes = [
     ]
   },
   { path: '/sample', component: SampleView },
+  { path: '/error', name: 'error', component: Error, props: true },
   { path: '/:pathMatch(.*)*', component: NotFound }
 ];
 

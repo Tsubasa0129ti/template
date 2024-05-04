@@ -65,7 +65,7 @@ public class SampleRestController {
       for (FieldError error : result.getFieldErrors()) {
         errors.put(error.getField(), error.getDefaultMessage());
       }
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+      return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(errors);
     }
 
     SampleCommand command = new SampleCommand(form);

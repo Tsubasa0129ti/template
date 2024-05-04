@@ -32,6 +32,8 @@ import getRepository from '../../api/repositoryFactory';
 import { SampleDto } from '../../store/samples/SampleDto';
 import SampleForm from '../../models/samples/SampleForm';
 import router from '../../router';
+import { UnprocessableEntity } from '../../utils/custom-error';
+import { AxiosError } from 'axios';
 
 const route = useRoute();
 
@@ -60,9 +62,6 @@ onMounted(() => {
     .samples.filterByUserName(input.value)
     .then((sampleDtos) => {
       samples.value = sampleDtos.data;
-    })
-    .catch((err) => {
-      console.log(err);
     });
 });
 
@@ -83,9 +82,15 @@ function postComment() {
     .then(() => {
       resetMessage();
     })
-    .catch((err) => {
-      nameError.value = err.response.data.name;
-      commentError.value = err.response.data.comment;
+    .catch((error) => {
+      if (error instanceof UnprocessableEntity) {
+        const axiosError = error.originalError as AxiosError;
+        const messages = axiosError.response?.data as { [key: string]: string };
+        nameError.value = messages.name;
+        commentError.value = messages.comment;
+      } else {
+        throw error;
+      }
     });
 }
 
