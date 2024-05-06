@@ -1,9 +1,3 @@
 <template>
-  <div>{{ errorMessage }}</div>
+  <slot></slot>
 </template>
-
-<script setup lang="ts">
-defineProps({
-  errorMessage: { type: String, required: false, default: null }
-});
-</script>
