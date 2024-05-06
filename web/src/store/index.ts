@@ -4,6 +4,7 @@ const store = createStore({
   state() {
     return {
       errorState: {
+        error: {},
         message: '',
         retry: false
       }
@@ -11,6 +12,7 @@ const store = createStore({
   },
   mutations: {
     updateErrorState(state, newState) {
+      state.errorState.error = newState.error;
       state.errorState.message = newState.message;
       state.errorState.retry = newState.retry;
     }

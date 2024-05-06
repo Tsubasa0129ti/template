@@ -59,13 +59,8 @@ axiosInstance.interceptors.response.use(
      * NOTE: サーバーダウンなどの原因により、レスポンスがない場合のハンドリング。
      */
     if (error.request) {
-      // if (window.confirm('ネットワークのエラーが発生しました。リトライしますか？')) {
-      //   return axiosInstance.request(error.config);
-      // }
-
-      console.log('pass');
-
       store.commit('updateErrorState', {
+        error: error,
         message: 'ネットワークのエラーが発生しました。リトライしますか？',
         retry: true
       });
