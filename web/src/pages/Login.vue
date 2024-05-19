@@ -4,26 +4,28 @@
     <div class="title-wrapper">
       <h1 class="title">Welcome back!</h1>
     </div>
-    <section class="content-wrapper">
-      <FormGroup
-        v-model="username"
-        label="Username"
-        :required="true"
-        placeholder="ユーザー名を入力してください。"
-        :message="usernameError"
-        class="form-group"
-      />
-      <FormGroup
-        v-model="password"
-        label="Password"
-        :required="true"
-        placeholder="パスワードを入力してください。"
-        :message="passwordError"
-        class="form-group"
-      />
-      <Link label="forgot password?" url="/forgot/password" class="form-link" />
-      <FormButton label="Login" @submit="submit" />
-    </section>
+    <div class="content-wrapper">
+      <section class="login-form">
+        <FormGroup
+          v-model="username"
+          label="Username"
+          :required="true"
+          placeholder="ユーザー名を入力してください。"
+          :message="usernameError"
+          class="form-group"
+        />
+        <FormGroup
+          v-model="password"
+          label="Password"
+          :required="true"
+          placeholder="パスワードを入力してください。"
+          :message="passwordError"
+          class="form-group"
+        />
+        <Link label="forgot password?" url="/forgot/password" class="form-link" />
+        <FormButton label="Login" @submit="submit" />
+      </section>
+    </div>
     <div class="login-footer">
       <p>
         Don't you have an account?
@@ -75,6 +77,12 @@ function submit() {
 }
 
 .content-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.login-form {
   min-width: 420px;
 }
 

@@ -22,5 +22,9 @@ const props = defineProps({
 .link {
   font-size: 14px;
   color: #a0bde6; /** 共通のカラーを用意する。 */
+
+  &:hover {
+    color: #bed8fc;
+  }
 }
 </style>

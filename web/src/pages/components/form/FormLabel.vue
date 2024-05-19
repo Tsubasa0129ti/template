@@ -18,6 +18,8 @@ defineProps({
 
 <style lang="scss">
 .label {
+  display: inline-block;
+  margin-bottom: 2px;
 }
 
 .required {
