@@ -1,10 +1,14 @@
 <template>
-  <label class="label" for="">{{ label }} <span v-if="required" class="required">必須</span></label>
+  <label class="label" :for="labelFor"
+    >{{ fieldName }} <span v-if="required" class="required">必須</span></label
+  >
 </template>
 
 <script setup lang="ts">
-defineProps({
-  label: {
+import { ComputedRef, computed } from 'vue';
+
+const props = defineProps({
+  fieldName: {
     type: String,
     required: true
   },
@@ -12,7 +16,18 @@ defineProps({
     type: Boolean,
     required: false,
     default: false
+  },
+  isCheckbox: {
+    type: Boolean,
+    required: true
   }
+});
+
+/**
+ * inputタグのtypeがcheckboxの時、for属性にfieldNameを適用する。
+ */
+const labelFor: ComputedRef<string | undefined> = computed(() => {
+  return props.isCheckbox ? props.fieldName : undefined;
 });
 </script>
 
@@ -26,8 +41,6 @@ defineProps({
   color: white;
   font-weight: 500;
   background: red; /* TODO: 共通要素を適用する */
-  border: 1px solid transparent;
-  border-radius: 3px;
   padding: 1px 2px;
   margin-left: 1px;
 }

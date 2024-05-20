@@ -1,21 +1,32 @@
 <template>
   <div>
-    <FormLabel :label="label" :required="required" />
-    <FormInput v-model="input" :placeholder="placeholder" />
+    <FormLabel :field-name="fieldName" :is-checkbox="isCheckbox" :required="required" />
+    <!-- TODO: FormTypeに応じて、呼び出す共通コンポーネントを変える必要がある。（checkboxなどは、スタイル等が違いすぎるため） -->
+    <FormInput
+      v-model="input"
+      :field-name="fieldName"
+      :form-type="formType"
+      :placeholder="placeholder"
+    />
     <FormError v-if="message" :message="message" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineModel } from 'vue';
+import { ComputedRef, computed, defineModel } from 'vue';
 import FormLabel from './FormLabel.vue';
 import FormInput from './FormInput.vue';
 import FormError from './FormError.vue';
 
-defineProps({
-  label: {
+const props = defineProps({
+  fieldName: {
     type: String,
     required: true
+  },
+  formType: {
+    type: String,
+    required: false,
+    default: 'text'
   },
   required: {
     type: Boolean,
@@ -33,6 +44,13 @@ defineProps({
     required: false,
     default: ''
   }
+});
+
+/**
+ * inputタグのtype属性がcheckboxかどうかを判定する。
+ */
+const isCheckbox: ComputedRef<boolean> = computed(() => {
+  return props.formType === 'checkbox' ? true : false;
 });
 
 const input = defineModel<string>();

@@ -1,5 +1,11 @@
 <template>
-  <input v-model="input" class="input" type="text" :placeholder="placeholder" />
+  <input
+    :id="fieldName"
+    v-model="input"
+    class="input"
+    :type="formType"
+    :placeholder="placeholder"
+  />
 </template>
 
 <script setup lang="ts">
@@ -7,6 +13,14 @@ import { defineModel } from 'vue';
 
 // TODO: 今後、`type`に他の要素を指定できるようにするべきかを検討する。passwordは必須か。inputTypeというものを用意するか。
 defineProps({
+  fieldName: {
+    type: String,
+    required: true
+  },
+  formType: {
+    type: String,
+    required: true
+  },
   placeholder: {
     type: String,
     required: false,

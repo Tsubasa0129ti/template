@@ -8,16 +8,15 @@
       <section class="login-form">
         <FormGroup
           v-model="username"
-          label="Username"
-          :required="true"
+          field-name="Username"
           placeholder="ユーザー名を入力してください。"
           :message="usernameError"
           class="form-group"
         />
         <FormGroup
           v-model="password"
-          label="Password"
-          :required="true"
+          field-name="Password"
+          form-type="password"
           placeholder="パスワードを入力してください。"
           :message="passwordError"
           class="form-group"
