@@ -7,8 +7,9 @@
       :field-name="fieldName"
       :form-type="formType"
       :placeholder="placeholder"
+      :has-error="hasError"
     />
-    <FormError v-if="message" :message="message" />
+    <FormError v-if="errorMessage" :message="errorMessage" />
   </div>
 </template>
 
@@ -38,8 +39,7 @@ const props = defineProps({
     required: false,
     default: ''
   },
-  // オブジェクト形式にする必要があるかもしれない
-  message: {
+  errorMessage: {
     type: String,
     required: false,
     default: ''
@@ -51,6 +51,13 @@ const props = defineProps({
  */
 const isCheckbox: ComputedRef<boolean> = computed(() => {
   return props.formType === 'checkbox' ? true : false;
+});
+
+/**
+ * 入力した内容にエラーがあるかどうか。
+ */
+const hasError: ComputedRef<boolean> = computed(() => {
+  return props.errorMessage ? true : false;
 });
 
 const input = defineModel<string>();

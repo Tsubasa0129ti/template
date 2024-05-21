@@ -3,8 +3,9 @@
     :id="fieldName"
     v-model="input"
     class="input"
+    :class="{ hasError: hasError }"
     :type="formType"
-    :placeholder="placeholder"
+    :placeholder="hasError ? '' : placeholder"
   />
 </template>
 
@@ -25,6 +26,10 @@ defineProps({
     type: String,
     required: false,
     default: ''
+  },
+  hasError: {
+    type: Boolean,
+    required: true
   }
 });
 
@@ -43,6 +48,15 @@ const input = defineModel<string>();
 
   &::placeholder {
     color: #b6b6b6;
+  }
+}
+
+.hasError {
+  border: 1px solid #ff3131;
+  background: #fbe3e1;
+
+  &:focus {
+    outline: 1px solid #ff3131;
   }
 }
 </style>

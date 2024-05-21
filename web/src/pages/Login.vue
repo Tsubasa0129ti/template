@@ -10,7 +10,7 @@
           v-model="username"
           field-name="Username"
           placeholder="ユーザー名を入力してください。"
-          :message="usernameError"
+          :error-message="errors.username"
           class="form-group"
         />
         <FormGroup
@@ -18,7 +18,7 @@
           field-name="Password"
           form-type="password"
           placeholder="パスワードを入力してください。"
-          :message="passwordError"
+          :error-message="errors.password"
           class="form-group"
         />
         <Link label="forgot password?" url="/forgot/password" class="form-link" />
@@ -48,8 +48,10 @@ const username = ref('');
 const password = ref('');
 
 // バリデーションの結果などを表示する想定（型は、仮置き）
-const usernameError = ref('');
-const passwordError = ref('');
+const errors = ref({
+  username: '',
+  password: ''
+});
 
 /**
  * ログイン処理を実行する。（Spring Securityのイシューで対応する。）
