@@ -1,15 +1,18 @@
 <template>
-  <input
+  <textarea
     :id="fieldName"
     v-model="input"
     class="input"
     :class="{ hasError: hasError }"
     :type="formType"
     :placeholder="hasError ? '' : placeholder"
-  />
+    cols="30"
+    rows="10"
+  ></textarea>
 </template>
 
 <script setup lang="ts">
+// TODO: 中身については検討していないので、後ほど修正する。
 import { defineModel } from 'vue';
 
 defineProps({

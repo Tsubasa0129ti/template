@@ -1,8 +1,8 @@
 <template>
   <div>
     <FormLabel :field-name="fieldName" :is-checkbox="isCheckbox" :required="required" />
-    <!-- TODO: FormTypeに応じて、呼び出す共通コンポーネントを変える必要がある。（checkboxなどは、スタイル等が違いすぎるため） -->
-    <FormInput
+    <component
+      :is="formInputComponent[formType]"
       v-model="input"
       :field-name="fieldName"
       :form-type="formType"
@@ -17,6 +17,7 @@
 import { ComputedRef, computed, defineModel } from 'vue';
 import FormLabel from './FormLabel.vue';
 import FormInput from './FormInput.vue';
+import FormTextarea from './FormTextarea.vue';
 import FormError from './FormError.vue';
 
 const props = defineProps({
@@ -45,6 +46,12 @@ const props = defineProps({
     default: ''
   }
 });
+
+const formInputComponent: { [key: string]: unknown } = {
+  text: FormInput,
+  password: FormInput,
+  textarea: FormTextarea
+};
 
 /**
  * inputタグのtype属性がcheckboxかどうかを判定する。
