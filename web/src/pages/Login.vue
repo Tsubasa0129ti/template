@@ -1,39 +1,37 @@
 <template>
-  <CommonHeader class="header" />
-  <main class="main-container">
-    <div class="title-wrapper">
+  <CommonHeader class="header-layout" />
+  <FormLayout>
+    <template #formHeader>
       <h1 class="title">Welcome back!</h1>
-    </div>
-    <div class="content-wrapper">
-      <section class="login-form">
-        <FormGroup
-          v-model="username"
-          field-name="Username"
-          placeholder="ユーザー名を入力してください。"
-          :error-message="errors.username"
-          class="form-group"
-        />
-        <FormGroup
-          v-model="password"
-          field-name="Password"
-          form-type="password"
-          placeholder="パスワードを入力してください。"
-          :error-message="errors.password"
-          class="form-group"
-        />
-        <Link label="forgot password?" url="/forgot/password" class="form-link" />
-        <FormButton label="Login" @submit="submit" />
-      </section>
-    </div>
-    <div class="login-footer">
+    </template>
+    <template #formContent>
+      <FormGroup
+        v-model="username"
+        field-name="Username"
+        placeholder="ユーザー名を入力してください。"
+        :error-message="errors.username"
+        class="form-group-layout"
+      />
+      <FormGroup
+        v-model="password"
+        field-name="Password"
+        form-type="password"
+        placeholder="パスワードを入力してください。"
+        :error-message="errors.password"
+        class="form-group-layout"
+      />
+      <Link label="forgot password?" url="/forgot/password" class="form-link-layout" />
+      <FormButton label="Login" @submit="submit" />
+    </template>
+    <template #formFooter>
       <p>
         Don't you have an account?
         <span>
           <Link label="sign up" url="/signup" />
         </span>
       </p>
-    </div>
-  </main>
+    </template>
+  </FormLayout>
 </template>
 
 <script setup lang="ts">
@@ -42,6 +40,7 @@ import CommonHeader from './components/common/CommonHeader.vue';
 import Link from './components/Link.vue';
 import FormButton from './components/form/FormButton.vue';
 import FormGroup from './components/form/FormGroup.vue';
+import FormLayout from './components/layout/FormLayout.vue';
 
 // 入力情報を管理する。
 const username = ref('');
@@ -61,37 +60,16 @@ function submit() {
 }
 </script>
 
-<style lang="scss">
-.header {
-  display: flex;
-  justify-content: center;
+<style lang="scss" scoped>
+.header-layout {
   margin: 30px 0;
 }
 
-.main-container {
-  display: flex;
-  padding: 80px 40px;
-  justify-content: center; /* 左右中央寄せ */
-  align-items: center; /* 上下中央寄せ */
-  flex-direction: column; /* 子要素を縦並びにする */
-  height: 100%;
-}
-
-.content-wrapper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.login-form {
-  min-width: 420px;
-}
-
-.form-group {
+.form-group-layout {
   margin-bottom: 16px;
 }
 
-.form-link {
+.form-link-layout {
   display: block;
   margin-bottom: 16px;
 }
