@@ -23,6 +23,17 @@
   flex-direction: column; /* 子要素を縦並びにする */
   height: 100%;
 
+  .form-header {
+    h1 {
+      text-align: center;
+    }
+
+    p {
+      max-width: 420px;
+      text-align: center;
+    }
+  }
+
   .content-wrapper {
     display: flex;
     justify-content: center;
