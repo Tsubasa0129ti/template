@@ -8,9 +8,10 @@
 
     <template #formContent>
       <FormGroup
+        v-model="email"
         field-name="Email"
         :required="true"
-        :error-message="errorMessage"
+        :error-message="errors.email"
         class="form-group-layout"
       />
       <FormButton label="Submit" />
@@ -31,7 +32,11 @@ import FormGroup from '../components/form/FormGroup.vue';
 import FormButton from '../components/form/FormButton.vue';
 import Link from '../components/Link.vue';
 
-const errorMessage = ref('');
+const email = ref('');
+
+const errors = ref({
+  email: ''
+});
 </script>
 
 <style lang="scss">

@@ -7,15 +7,19 @@
 
     <template #formContent>
       <FormGroup
+        v-model="password"
         field-name="Password"
+        form-type="password"
         :required="true"
-        :error-message="passwordError"
+        :error-message="errors.password"
         class="form-group-layout"
       />
       <FormGroup
+        v-model="confirmPassword"
         field-name="Confirm Password"
+        form-type="password"
         :required="true"
-        :error-message="confirmPasswordError"
+        :error-message="errors.confirmPassword"
         class="form-group-layout"
       />
       <FormButton label="Reset Password" />
@@ -36,8 +40,13 @@ import FormGroup from '../components/form/FormGroup.vue';
 import FormButton from '../components/form/FormButton.vue';
 import Link from '../components/Link.vue';
 
-const passwordError = ref('');
-const confirmPasswordError = ref('');
+const password = ref('');
+const confirmPassword = ref('');
+
+const errors = ref({
+  password: '',
+  confirmPassword: ''
+});
 </script>
 
 <style lang="scss">
