@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import router from '../router/index';
-import store from '../store/index';
+import { useErrorStore } from '../store/error-store';
 import { InternalServerError, NetWorkError, UnprocessableEntity } from '../utils/custom-error';
 
 const baseDomain = import.meta.env.VITE_API_BASE_URL;
@@ -27,8 +27,8 @@ axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
     return response;
   },
+  // TODO: エラー回避のため、型を指定していない。AxiosErrorを設定できないかを検討する。
   (error) => {
-    console.log('interceptors');
     /**
      * NOTE: サーバーからのエラーのレスポンスがある場合のハンドリング。
      */
@@ -59,7 +59,8 @@ axiosInstance.interceptors.response.use(
      * NOTE: サーバーダウンなどの原因により、レスポンスがない場合のハンドリング。
      */
     if (error.request) {
-      store.commit('updateErrorState', {
+      const errorStore = useErrorStore();
+      errorStore.updateErrorState({
         error: error,
         message: 'ネットワークのエラーが発生しました。リトライしますか？',
         retry: true

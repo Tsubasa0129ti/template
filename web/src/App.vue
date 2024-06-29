@@ -1,8 +1,8 @@
 <template>
   <ErrorMessage>
     <div>
-      <span>{{ errorState.message }}</span>
-      <button v-if="errorState.retry" @click="retryRequest">リトライ</button>
+      <span>{{ errorStore.message }}</span>
+      <button v-if="errorStore.retry" @click="retryRequest">リトライ</button>
     </div>
   </ErrorMessage>
   <router-view></router-view>
@@ -10,13 +10,9 @@
 
 <script setup lang="ts">
 import ErrorMessage from './pages/components/ErrorMessage.vue';
-import { computed } from 'vue';
-import { useStore } from 'vuex';
 import useRetry from './composables/useRetry';
+import { useErrorStore } from './store/error-store';
 
-const store = useStore();
+const errorStore = useErrorStore();
 const { retryRequest } = useRetry();
-const errorState = computed(() => {
-  return store.state.errorState;
-});
 </script>

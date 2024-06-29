@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import store from './store/index';
+import { createPinia } from 'pinia';
 import './styles/style.scss';
 import App from './App.vue';
 import router from './router/index';
@@ -10,9 +10,10 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(fas);
 
+const pinia = createPinia();
 const app = createApp(App);
 
-app.use(store);
+app.use(pinia);
 app.use(router);
 app.use(ErrorHandlerPlugin);
 
