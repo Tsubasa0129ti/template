@@ -2,6 +2,19 @@
 
 for application template and develop new application quickly.
 
+## Vite
+
+画面レイアウトの確認のために、Docker を起動するのは少しオーバーとなる。
+Vite からフロントエンドの簡易的なサーバーを立ち上げることができる。
+
+web プロジェクトから以下のコマンドを実行する。
+
+```bash
+
+$ yarn vite dev
+
+```
+
 ## Docker
 
 本プロジェクトでは、Docker を使用している。
