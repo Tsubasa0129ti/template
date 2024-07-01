@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import repository from '../repository';
-import { SampleDto } from '../../store/samples/SampleDto';
+import { SampleDto } from '@store/samples/SampleDto';
 import SampleForm from '../../models/samples/SampleForm';
 
 const resources = '/sample';

@@ -9,9 +9,9 @@
 </template>
 
 <script setup lang="ts">
-import ErrorMessage from './pages/components/ErrorMessage.vue';
-import useRetry from './composables/useRetry';
-import { useErrorStore } from './store/error-store';
+import ErrorMessage from '@components/ErrorMessage.vue';
+import useRetry from '@composables/useRetry';
+import { useErrorStore } from '@store/error-store';
 
 const errorStore = useErrorStore();
 const { retryRequest } = useRetry();

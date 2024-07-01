@@ -34,11 +34,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import CommonHeader from '../components/common/CommonHeader.vue';
-import FormLayout from '../components/layout/FormLayout.vue';
-import FormGroup from '../components/form/FormGroup.vue';
-import FormButton from '../components/form/FormButton.vue';
-import Link from '../components/Link.vue';
+import CommonHeader from '@components/common/CommonHeader.vue';
+import FormLayout from '@components/layout/FormLayout.vue';
+import FormGroup from '@components/form/FormGroup.vue';
+import FormButton from '@components/form/FormButton.vue';
+import Link from '@components/Link.vue';
 
 const password = ref('');
 const confirmPassword = ref('');

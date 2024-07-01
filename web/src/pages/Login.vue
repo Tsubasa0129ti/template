@@ -36,11 +36,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import CommonHeader from './components/common/CommonHeader.vue';
-import Link from './components/Link.vue';
-import FormButton from './components/form/FormButton.vue';
-import FormGroup from './components/form/FormGroup.vue';
-import FormLayout from './components/layout/FormLayout.vue';
+import CommonHeader from '@components/common/CommonHeader.vue';
+import Link from '@components/Link.vue';
+import FormButton from '@components/form/FormButton.vue';
+import FormGroup from '@components/form/FormGroup.vue';
+import FormLayout from '@components/layout/FormLayout.vue';
 
 // 入力情報を管理する。
 const username = ref('');
