@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '@components': path.join(__dirname, 'src/pages/components'),
-        '@store': path.resolve(__dirname, 'src/store'),
+        '@store': path.join(__dirname, 'src/store'),
         '@composables': path.join(__dirname, 'src/composables')
       }
     },
