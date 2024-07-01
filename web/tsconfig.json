@@ -22,7 +22,13 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
 
-    "resolvePackageJsonExports": false
+    "resolvePackageJsonExports": false,
+
+    "paths": {
+      "@components/*": ["./src/pages/components/*"],
+      "@store/*": ["./src/store/*"],
+      "@composables/*": ["./src/composables/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]

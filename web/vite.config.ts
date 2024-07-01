@@ -2,6 +2,7 @@ import { splitVendorChunkPlugin, defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import checker from 'vite-plugin-checker';
 import path from 'path';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 /** プロジェクトルートを設定。 */
 const root = path.resolve(__dirname, 'src');
@@ -15,6 +16,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       vue(),
       splitVendorChunkPlugin(),
+      tsconfigPaths(),
       isDev
         ? checker({
             vueTsc: true
@@ -23,8 +25,9 @@ export default defineConfig(({ mode }) => {
     ],
     resolve: {
       alias: {
-        // import '/@component/sample.vue'からモジュールを使用可能にする。
-        '/@component/': path.join(__dirname, 'src/components')
+        '@components': path.join(__dirname, 'src/pages/components'),
+        '@store': path.resolve(__dirname, 'src/store'),
+        '@composables': path.join(__dirname, 'src/composables')
       }
     },
     server: {
