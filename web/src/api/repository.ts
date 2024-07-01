@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import router from '../router/index';
-import { useErrorStore } from '../store/error-store';
+import { useErrorStore } from '@store/error-store';
 import { InternalServerError, NetWorkError, UnprocessableEntity } from '../utils/custom-error';
 
 const baseDomain = import.meta.env.VITE_API_BASE_URL;

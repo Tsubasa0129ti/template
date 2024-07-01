@@ -29,7 +29,7 @@
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import getRepository from '../../api/repositoryFactory';
-import { SampleDto } from '../../store/samples/SampleDto';
+import { SampleDto } from '@store/samples/SampleDto';
 import SampleForm from '../../models/samples/SampleForm';
 import router from '../../router';
 import { UnprocessableEntity } from '../../utils/custom-error';

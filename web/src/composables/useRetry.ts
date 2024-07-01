@@ -1,6 +1,6 @@
 import { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import axiosInstance from '../api/repository';
-import { useErrorStore } from '../store/error-store';
+import { useErrorStore } from '@store/error-store';
 
 /**
  * Axiosのリトライ処理を実行する。
